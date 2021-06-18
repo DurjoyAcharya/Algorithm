@@ -9,8 +9,8 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 
 public class Day011 {
-//    public static final String CHUCK_NORRIS_RANDOM_JOKES_API="https://api.chucknorris.io/jokes/random";
-    public static final String CHUCK_NORRIS_RANDOM_JOKES_API="https://www.google.com";
+   public static final String CHUCK_NORRIS_RANDOM_JOKES_API="https://api.chucknorris.io/jokes/random";
+    //public static final String CHUCK_NORRIS_RANDOM_JOKES_API="https://www.google.com";
     public static void main(String[] args) throws URISyntaxException, IOException,InterruptedException {
     var client= HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_1_1)
