@@ -7,9 +7,7 @@ public class QuickSort {
         int i = (low-1); // index of smaller element
         for (int j=low; j<high; j++)
         {
-            // If current element is smaller than or
-            // equal to pivot
-            if (arr[j] <= pivot)
+             if (arr[j] <= pivot)
             {
                 i++;
 
@@ -37,18 +35,13 @@ public class QuickSort {
     {
         if (low < high)
         {
-            /* pi is partitioning index, arr[pi] is
-              now at right place */
             int pi = partition(arr, low, high);
 
-            // Recursively sort elements before
-            // partition and after partition
             sort(arr, low, pi-1);
             sort(arr, pi+1, high);
         }
     }
 
-    /* A utility function to print array of size n */
     static void printArray(int arr[])
     {
         int n = arr.length;
@@ -60,9 +53,11 @@ public class QuickSort {
     // Driver program
     public static void main(String args[])
     {
-        int arr[] = {10, 7, 8, 9, 1, 5};
-        int n = arr.length;
-
+        int[] arr=new int[100];
+        for (int i = 0; i < 100; i++) {
+            arr[i]=(int)(Math.random()+i)*i;
+        }
+        int n= arr.length;
         QuickSort ob = new QuickSort();
         ob.sort(arr, 0, n-1);
 
