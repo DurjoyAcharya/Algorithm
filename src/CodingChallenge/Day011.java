@@ -1,4 +1,4 @@
-package OOP_lab;
+package CodingChallenge;
 
 import java.io.IOException;
 import java.net.URI;

@@ -1,4 +1,4 @@
-package OOP_lab;
+package CodingChallenge;
 
 public class DeSerial {
 

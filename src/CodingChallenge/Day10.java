@@ -1,7 +1,6 @@
-package OOP_lab;
+package CodingChallenge;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
