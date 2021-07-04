@@ -1,6 +1,10 @@
 package Algorithms_i;
 
-//Task is debug it and next kruskal algorithm
+/**
+ * Name:Durjoy Acharjya
+ * Id:1925102002
+ * Batch:51
+ */
 public class Prims_Algorithm extends Graph {
     int Cost;
     int[] Key;
@@ -14,20 +18,7 @@ public class Prims_Algorithm extends Graph {
             Key[i]=Integer.MAX_VALUE;
         Included=new int[v];
     }
-    public int MinValueVertex()
-    {
-        var min=Integer.MAX_VALUE;
-        var index=-1;
-        for(int i=0;i< Key.length;i++)
-        {
-            if(Included[i]==0 && Key[i]<min){
-                min=Key[i];
-                index=i;
-            }
-        }
-        return index;
-    }
-    public void Prims(int[][] weight,int start) {
+    public void Prims(int[][] weight,int start) { // This is Main Engine
         Key[start]=0;
         vertex[start].parent=null;
         int u=MinValueVertex();
@@ -44,7 +35,20 @@ public class Prims_Algorithm extends Graph {
             u=MinValueVertex();
 
         }
-        System.out.println("Total cost: "+Cost);
+        System.out.println("Minimum Cost: "+Cost);
+    }
+    public int MinValueVertex()
+    {
+        var min=Integer.MAX_VALUE;
+        var index=-1;
+        for(int i=0;i< Key.length;i++)
+        {
+            if(Included[i]==0 && Key[i]<min){
+                min=Key[i];
+                index=i;
+            }
+        }
+        return index;
     }
         public static void main(String[] args) {
         java.util.Scanner sc=new java.util.Scanner(System.in);
