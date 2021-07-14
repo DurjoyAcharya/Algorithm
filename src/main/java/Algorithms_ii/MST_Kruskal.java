@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 class EDGE implements Comparable<EDGE> {
     public VERTEX SRC;
@@ -22,12 +21,11 @@ class EDGE implements Comparable<EDGE> {
     }
     @Override
     public String toString() {
-        String str = "FROM: " + this.SRC.index +
-                " TO: " + this.DIST.index +
-                " WEIGHT: " + this.WEIGHT;
+        String str = "Source-> " + this.SRC.index +
+                "-> Dest-> " + this.DIST.index +
+                "-> Weight-> " + this.WEIGHT;
         return str;
     }
-
 }
 
 class VERTEX{
@@ -40,9 +38,9 @@ class VERTEX{
     public boolean equals (Object obj) {
         if (obj == null) return false;
 
-        if (!VERTEX.class.isAssignableFrom(obj.getClass())) {
-            return false;
-        }
+//        if (!VERTEX.class.isAssignableFrom(obj.getClass())) {
+//            return false;
+//        }
         final VERTEX v = (VERTEX) obj;
         return v.index == this.index;
     }
@@ -68,14 +66,14 @@ class GRAPH{
     public EDGE[] MST_kruskal()
     {
         var A=new LinkedList<EDGE>();
-        DISJOINTSET set=new DISJOINTSET(vertices.length);
+        DISJOINTSET Set=new DISJOINTSET(vertices.length);
         Arrays.sort(edges);
         for (EDGE e:edges)
         {
-            if (set.find(e.SRC.index)!= set.find(e.DIST.index))
+            if (Set.find(e.SRC.index)!= Set.find(e.DIST.index))
             {
                 A.add(e);
-                set.union(e.SRC.index,e.DIST.index);
+                Set.union(e.SRC.index,e.DIST.index);
             }
         }
         EDGE[] MST = new EDGE[A.size()];
@@ -91,7 +89,7 @@ class DISJOINTSET {
             SET[i] = i;
     }
     public int find(int p) {
-        return SET[p];
+                   return SET[p];
     }
     public void union(int p, int q) {
         int root = SET[q];
@@ -106,7 +104,7 @@ public class MST_Kruskal {
     private static final String FILE = "input.txt";
     public static void main(String[] args) {
         try {
-            var scan=new Scanner(new File(FILE));
+            var scan=new java.util.Scanner(new File(FILE));
             int vertices= scan.nextInt();
             int edges= scan.nextInt();
             EDGE[] edges1=new EDGE[edges];
@@ -114,8 +112,7 @@ public class MST_Kruskal {
                 int src= scan.nextInt();
                 int dest=scan.nextInt();
                 int weight= scan.nextInt();
-                EDGE e=new EDGE(src,dest,weight);
-                edges1[i]=e;
+                edges1[i]=new EDGE(src,dest,weight);
             }
             GRAPH G=new GRAPH(edges1,vertices);
             EDGE[] E=G.MST_kruskal();
@@ -124,7 +121,7 @@ public class MST_Kruskal {
                 System.out.println(e.toString());
                 sum += e.WEIGHT;
             }
-            System.out.println("TOTAL MINIMUM WEIGHT: " + sum);
+            System.out.println("Minimum weight cost: " + sum);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
