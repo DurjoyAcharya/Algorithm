@@ -15,10 +15,7 @@ public class Day002 {
     {
         return cache.computeIfAbsent(n,key->fibonacci(key-1).add(fibonacci(key-2)));
     }
-    public static BigInteger factorial(int n)
-    {
-        return cache.computeIfAbsent(n,key->factorial(key));
-    }
+
     public static Long Fibo(int n)
     {
         if (!cache2.containsKey(n))
@@ -31,11 +28,10 @@ public class Day002 {
     public static void main(String[] args) {
         var n=10;
         System.out.println("Sum Of Nth Fibonacci: "+fibonacci(10));
-        for (int i = 0; i < n; i++) {
-            System.out.print(fibonacci(i)+" ");
-        }
-      //  System.out.println("\n"+factorial(4));
-        System.out.println(Fibo(100));
+//        for (int i = 0; i < n; i++) {
+//            System.out.print(fibonacci(i)+" ");
+//        }
+        //System.out.println(Fibo(100));
         System.out.println("Ok Thank you 🙄");
     }
 }
