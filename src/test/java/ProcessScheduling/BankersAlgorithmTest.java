@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BankersAlgorithmTest {
     @Test
     public void test() {
-        int[] available = {3, 3, 2};
+        int[] available = {10, 5, 7};
         int[][] max = {
                 {7, 5, 3}, {3, 2, 2}, {9, 0, 2}, {4, 2, 2}, {5, 3, 3}
         };
