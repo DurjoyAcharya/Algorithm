@@ -34,7 +34,6 @@ function factorial(n) {
             return arr[n];
         }
 }
-
 function main() {
     const n = +(readLine());
     console.log(factorial(n));
