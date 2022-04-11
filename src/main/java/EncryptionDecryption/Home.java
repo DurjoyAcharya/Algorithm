@@ -39,25 +39,40 @@ public class Home <T>{
     {
         if (map.containsKey(vertex))
             System.out.println("This Graph Contains: "+vertex+" Vertex");
+        else
         System.out.println("This Graph Doesn't Contains: "+vertex+" Vertex");
-
     }
-    public void containEdge()
+    public void containEdge(T source,T destination)
     {
-
+        if (map.get(source).contains(destination))
+            System.out.println("This Graph has edge between "+source+" and "+destination);
+        else
+            System.out.println("This Graph has no edge between "+source+" and "+destination);
     }
 
-
-
-
-
-
-
-
-
-
+    @Override
+    public String toString() {
+     var stringBuilder=new StringBuilder();
+     for (T v:map.keySet())
+     {
+         stringBuilder.append(v.toString()+" : ");
+         for (T w:map.get(v))
+         {
+             stringBuilder.append(w.toString()+" ");
+         }
+        stringBuilder.append("\n");
+     }
+        return stringBuilder.toString();
+    }
+}
+class HomeImplementation{
 
     public static void main(String[] args) {
-
+            var home=new Home<Character>();
+            home.addNode('A','B',true);
+            home.addNode('B','C',true);
+            home.addNode('A','C',true);
+            System.out.println(home.toString());
+            home.containEdge('A','D');
     }
 }
