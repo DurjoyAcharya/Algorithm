@@ -1,7 +1,8 @@
-package Internet;
+package TrashBox;
 
-public class Server {
 
+
+public class NonBlockingQueue {
     public static void main(String[] args) {
 
     }
