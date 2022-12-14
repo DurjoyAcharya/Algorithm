@@ -38,7 +38,7 @@ public class ShortestJobFirst {
         System.out.println("Please First Enter PID then Arrival Time and then Burst Time");
         for (int i = 0; i < pro.length; i++) {
             pro[i] = new Processes();
-            pro[i].Pid = sc.next();
+            pro[i].Pid = Integer.parseInt(sc.next());
             pro[i].arrival_time = sc.nextInt();
             pro[i].burst_time = sc.nextInt();
         }
