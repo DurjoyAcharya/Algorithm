@@ -24,6 +24,9 @@ interface SimulationFunction<T>{
 public class SingleServerQueue implements SimulationFunction<Simulation>{
     private Simulation[] simulations;
     private int total_service_time;
+    public int total_idle_time=0;
+    public int total_waiting_time=0;
+    public int wait_count=0;
     private int N;//Number Of Customer;
     private double avg_waiting_time;
     private double probability_wait;
@@ -109,7 +112,9 @@ public class SingleServerQueue implements SimulationFunction<Simulation>{
         CompletionOfService(simulations,N);
         //After play with ScheduleServiceTime & CompletionOfService then WaitingAndIdle
         WaitingAndIdleTime(simulations,N);
-
+        int tst=SpendTime(simulations,N);
+        System.out.printf("\n   --------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("");
 
 
     }
@@ -120,12 +125,20 @@ public class SingleServerQueue implements SimulationFunction<Simulation>{
 
     @Override
     public void ScheduleArrivalTime(Simulation[] simulations, int n) {
-
+        for( int i=2; i<=n; i++)
+            simulations[i].arr_time=simulations[i-1].arr_time+simulations[i].iat;
     }
 
     @Override
     public void ScheduleServiceTime(Simulation[] simulations, int n) {
-
+        for(int i=2; i<=n; i++){
+            if(simulations[i].arr_time > simulations[i-1].time_ser_end){
+                simulations[i].service_begin=simulations[i].arr_time;
+            }
+            else{
+                simulations[i].service_begin=simulations[i-1].time_ser_end;
+            }
+        }
     }
 
     @Override
@@ -135,11 +148,34 @@ public class SingleServerQueue implements SimulationFunction<Simulation>{
 
     @Override
     public int WaitingAndIdleTime(Simulation[] simulations, int n) {
-        return 0;
+        simulations[1].waiting_time=0;
+        simulations[1].idle_time=0;
+        for( int i=2; i<=n; i++){
+            if(simulations[i].arr_time > simulations[i-1].time_ser_end){
+                simulations[i].idle_time=simulations[i].arr_time-simulations[i-1].time_ser_end;
+                total_idle_time+=simulations[i].idle_time;
+                simulations[i].waiting_time=0;
+            }
+            else{
+                simulations[i].waiting_time=simulations[i-1].time_ser_end-simulations[i].arr_time;
+                total_waiting_time+=simulations[i].waiting_time;
+                simulations[i].idle_time=0;
+            }
+            if(simulations[i].waiting_time!=0)
+                wait_count+=1;
+        }
+        return total_idle_time;//confussioning
     }
 
     @Override
     public int SpendTime(Simulation[] simulations, int n) {
-        return 0;
+        int total_spend_time=0;
+        for(int i=1;i<=n;i++)
+        {
+            simulations[i].spend = simulations[i].service_time+simulations[i].waiting_time;
+            total_spend_time+=simulations[i].spend;
+
+        }
+        return total_spend_time;
     }
 }
