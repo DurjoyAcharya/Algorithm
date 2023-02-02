@@ -113,9 +113,10 @@ public class SingleServerQueue implements SimulationFunction<Simulation>{
         //After play with ScheduleServiceTime & CompletionOfService then WaitingAndIdle
         WaitingAndIdleTime(simulations,N);
         int tst=SpendTime(simulations,N);
-        System.out.printf("\n   --------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("");
-
+        System.out.printf("\n   -----------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("\n   -----------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("\n  | Customer No| Random. For | Inter_arrival | Arrival | Random for | Service | T.Service| T.Service| Waiting | Server | Spend in |\n");
+        //waiting for implementation
 
     }
 
@@ -143,7 +144,8 @@ public class SingleServerQueue implements SimulationFunction<Simulation>{
 
     @Override
     public void CompletionOfService(Simulation[] simulations, int n) {
-
+        for( int i=1; i<=n; i++)
+            simulations[i].time_ser_end=simulations[i].service_begin+simulations[i].service_time;
     }
 
     @Override
