@@ -34,7 +34,7 @@ public class SingleServerQueue implements SimulationFunction<Simulation>{
     private double avg_service_time;
     private double avg_time_btn_arrival;
     private double avg_waiting_time_those_who_wait;
-    private double Average_time_customer_spends_in_the_system;
+    private double average_time_customer_spends_in_the_system;
     private static final java.util.Scanner sc=new java.util.Scanner(System.in);
     public SingleServerQueue()
     {
@@ -49,7 +49,7 @@ public class SingleServerQueue implements SimulationFunction<Simulation>{
         N=sc.nextInt();
         System.out.println("Enter Random Digit For Arrival Time For Every Customer: ");
         for (int i = 1; i < 2; i++) {
-            System.out.println("Random Arrival[1]: - ");
+            System.out.println("  Random Arrival[1]: - ");
             simulations[i].customer_no=1;
             simulations[i].rd_ar=0;
             simulations[i].iat=0;
@@ -80,7 +80,7 @@ public class SingleServerQueue implements SimulationFunction<Simulation>{
             }
         }
         ScheduleArrivalTime(simulations,N);
-        System.out.println(" Enter random digit for service time for each customer: ");
+        System.out.println("Enter random digit for service time for each customer: ");
         for(int i=1;i<2;i++)
             simulations[i].service_begin=0;
         for (int i = 1; i <=N; i++) {
@@ -112,16 +112,46 @@ public class SingleServerQueue implements SimulationFunction<Simulation>{
         CompletionOfService(simulations,N);
         //After play with ScheduleServiceTime & CompletionOfService then WaitingAndIdle
         WaitingAndIdleTime(simulations,N);
-        int tst=SpendTime(simulations,N);
+        int tst=SpendTime(simulations,N);//total spend time
         System.out.printf("\n   -----------------------------------------------------------------------------------------------------------------------------------");
         System.out.printf("\n   -----------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("\n  | Customer No| Random. For | Inter_arrival | Arrival | Random for | Service | T.Service| T.Service| Waiting | Server | Spend in |\n");
+        System.out.printf("\n   | Customer  | Random. For | Inter_arrival | Arrival |Random for   | Service | T.Service | T.Service |  Waiting | Server  | Spend in |\n");
         //waiting for implementation
+        System.out.printf("    | No.     |Arrival. Time| Time          | Time    |Service.Time | Time     |  Begin    |    End    |  in Queue| Idle.T |  System  |");
+        System.out.printf("\n   ----------------------------------------------------------------------------------------------------------------------------------\n");
+        for (int i = 1; i <=N; i++) {
+            System.out.println(simulations[i].customer_no+"     "+simulations[i].rd_ar+"     "+simulations[i].iat+"     "+
+                    simulations[i].arr_time+"   "+simulations[i].rd_se+"    "+simulations[i].service_time+"     "+
+                    simulations[i].service_begin+"      "+simulations[i].time_ser_end+"     "+simulations[i].waiting_time+
+                    "       "+simulations[i].idle_time+"       "+simulations[i].spend);
+            if (i!=N)
+                System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
+            else
+                System.out.println("\"   -----------------------------------------------------------====-----------------------------====--------====------====--\\n\"");
+        }
+        System.out.println("\t\t\t\t\t\t\t   "+total_service_time+" \t\t\t\t   "+total_waiting_time+"   \t"+total_idle_time+"   \t"+tst );
+        avg_waiting_time = (double) total_waiting_time/(double)N;
+        probability_wait = (double) wait_count/(double)N;
+        probability_of_idle_server = (double) total_idle_time/(float)simulations[N].time_ser_end;
+        avg_service_time = (double) total_service_time/(double) N;
+        avg_time_btn_arrival = (double) simulations[N].arr_time/(double)(N-1);
+        avg_waiting_time_those_who_wait = (float)total_waiting_time/(float)wait_count;
+        average_time_customer_spends_in_the_system = (float)tst/(float)N;
 
+        System.out.println(" Average waiting time = "+avg_waiting_time);
+        System.out.println(" Probability(wait) = "+probability_wait);
+        System.out.println(" Probability of idle server = "+probability_of_idle_server);
+        System.out.println(" Average service time = "+avg_service_time);
+        System.out.println(" Average time between arrival = "+avg_time_btn_arrival);
+        System.out.println(" Average waiting time of those who wait =  "+avg_waiting_time_those_who_wait);
+        System.out.println(" Average time customer spends in the system = "+average_time_customer_spends_in_the_system);
+        System.out.println();
+        System.out.println();
     }
 
     public static void main(String[] args) {
-        //System.out.printf("arr[%d]",5);
+        //waiting for lunchSimulation
+        new SingleServerQueue().lunchSimulation();
     }
 
     @Override
