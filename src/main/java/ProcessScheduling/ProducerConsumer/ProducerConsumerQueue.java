@@ -1,6 +1,6 @@
 package ProcessScheduling.ProducerConsumer;
 
-public interface ProducerConsumerQueue<T>{
-    public void put(T value);
-    public T get();
+public interface ProducerConsumerQueue<M>{
+    public void put(M value);
+    public M get();
 }
